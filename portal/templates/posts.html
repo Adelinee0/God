@@ -1,0 +1,38 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+   <h1>Все статьи</h1>
+   <hr>
+   {% if posts %}
+       <table>
+           <tr>
+               <td>Название</td>
+               <td>Дата создания</td>
+               <td>Описание</td>
+               <td>Категория</td>
+
+           </tr>
+
+
+           {% for post in posts %}
+           <tr>
+
+               <td>{{ post.name|tsenzor }}</td>
+               <td>{{ post.createDate|date:'M d Y' }}</td>
+               <td>{{ post.description|truncatechars:20|tsenzor}}</td>
+               <td>{{ post.category.name }}</td>
+
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2> Новостей нет!</h2>
+   {% endif %}
+{% endblock content %}
